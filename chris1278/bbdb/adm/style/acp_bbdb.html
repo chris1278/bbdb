@@ -1,0 +1,168 @@
+{% INCLUDECSS '@chris1278_bbdb/css/acp_bbdb.css' %}
+{% INCLUDE 'overall_header.html' %}
+
+<h1>{{ lang('ACP_BBDB_TITLE') }}</h1>
+<p>{{ lang('ACP_BBDB_TITLE_EXPLAIN', BBCODE_ACP_LINK) }}</p>
+
+<a id="maincontent"></a>
+
+{% if BBCB_S_ERROR %}
+	<div class="errorbox">
+		<h3>{{ lang('WARNING') }}</h3>
+		<p>{{ BBCB_ERROR_MSG }}</p>
+	</div>
+{% endif %}
+{% if CB_BCBB %}
+	<a href="{{ U_CB_BACK }}" style="float: {S_CONTENT_FLOW_END};">&laquo; {{ lang('BACK')}}</a><br>
+	<form method="post" action="{{ U_ACTION }}">
+	<fieldset>
+		<legend>{{ lang('CB_ACP_BBCODE_TITEL') }}</legend>
+		<dl>
+			<dt>
+				<span>{{ lang('CB_ACP_BBCODE_TITEL_EXPLAIN') }}</span>
+			</dt>
+			<dd>
+				<input size="113" type="text" name="cb_bbcode_titel"  value="{{ CB_BBCODE_TITEL }}">
+			</dd>
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>{{ lang('CB_BBCODE_USAGE') }}</legend>
+		<dl>
+			<dt>
+				<span>{{ lang('CB_BBCODE_USAGE_EXPLAIN') }}</span>
+			</dt>
+			<dd>
+				<textarea name="cb_bbcode_match" cols="60" rows="8">{{ CB_BBCODE_MATCH }}</textarea>
+			</dd>
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>{{ lang('CB_HTML_REPLACEMENT') }}</legend>
+		<dl>
+			<dt>
+				<span>{{ lang('CB_HTML_REPLACEMENT_EXPLAIN')}}</span>
+			</dt>
+			<dd>
+				<textarea  name="cb_bbcode_tpl" cols="60" rows="8">{{ CB_BBCODE_TPL }}</textarea>
+			</dd>
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>{{ lang('CB_SHORT_DESCRIPTION') }}</legend>
+		<dl>
+			<dt>
+				<span>{{ lang('CB_SHORT_DESC_EXPLAIN')}}</span>
+			</dt>
+			<dd>
+				<input size="113" type="text" name="cb_bbcode_short_description"  value="{{ CB_SHORT_DESC }}">
+			</dd>
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>{{ lang('CB_LONG_DESCRIPTION') }}</legend>
+		<dl>
+			<dt>
+				<span>{{ lang('CB_LONG_DESC_EXPLAIN')}}</span>
+			</dt>
+			<dd>
+				<textarea name="cb_bbcode_long_description" cols="60" rows="8">{{ CB_LONG_DESC }}</textarea>
+			</dd>
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>{{ lang('CB_ACP_BBCODE_DEMO') }}</legend>
+		<dl>
+			<dt>
+				<span>{{ lang('CB_ACP_BBCODE_DEMO_EXPLAIN')}}</span>
+			</dt>
+			<dd>
+				<textarea name="cb_bbcode_demo" cols="60" rows="8">{{ CB_BBCODE_DEMO }}</textarea>
+			</dd>
+		</dl>
+	</fieldset>
+	<fieldset class="submit-buttons">
+		<legend>{{ lang('SUBMIT') }}</legend>
+		<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}">
+		{{ S_FORM_TOKEN }}
+	</fieldset>
+
+	<br>
+
+	<table class="table1" id="down">
+	<thead>
+	<tr>
+		<th colspan="2">{{ lang('CB_TOKENS') }}</th>
+	</tr>
+	<tr>
+		<td class="row3" colspan="2">{{ lang('CB_TOKENS_EXPLAIN') }}</td>
+	</tr>
+	<tr>
+		<th>{{ lang('CB_TOKEN') }}</th>
+		<th>{{ lang('CB_TOKEN_DEFINITION') }}</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% for options in loops.cb_token %}
+		<tr style="vertical-align: top;">
+			<td class="row1">{{ options.TOKEN }}</td>
+			<td class="row2">{{ options.EXPLAIN }}</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+	</table>
+	</form>
+
+{% else %}
+
+
+	<form method="post" action="{{ U_ACTION }}">
+	<fieldset class="tabulated">
+	<legend>{{ lang('ACP_BBCODES') }}</legend>
+
+	<table class="table1 zebra-table" id="down">
+	<thead>
+	<tr>
+		<th style="text-align: center;">{{ lang('CB_BBCODE_TITLE') }}</th>
+		<th style="text-align: center;">{{ lang('CB_BBCODE_SHORT_DESC') }}</th>
+		<th style="text-align: center;">{{ lang('ACTION') }}</th>
+	</tr>
+	</thead>
+	<tbody>
+
+	{% for options in loops.cb_bbcodes %}
+		{% if options.CB_BBCODE_SHOW  %}
+			<tr>
+				<td style="text-align: center;"><b>{{ options.CB_BBCODE_TITEL }}</b></td>
+				<td style="text-align: center;">{{ options.CB_BBCODE_SHORT_DESC }}</td>
+				{% if not options.CB_NO_EXT_EDIT  %}
+					<td class="actions"><a href="{{ options.U_CB_EDIT }}"><i class="fa fa-cog cb_edit_icon" aria-hidden="true"></i></a> <a href="{{ options.U_CB_DELETE }}" data-ajax="row_delete"><i class="fa fa-times-circle cb_del_icon" aria-hidden="true"></i></a></td>
+				{% else %}
+					<td class="actions"><a href="{{ options.U_NO_EXT_EDIT }}"><i class="fa fa-cog cb_edit_icon" aria-hidden="true"></i></a></td>
+				{% endif %}
+			</tr>
+		{% endif %}
+	{% else %}
+		<tr class="row3">
+			<td colspan="2">{{ lang('ACP_NO_ITEMS') }}</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+	</table>
+
+	<p class="quick">
+		<a href="{{ U_CB_ADD }}" class="button2 cb_button">{{ lang('CB_ADD_BBCODE') }}</a>
+	</p>
+
+	{{ S_FORM_TOKEN }}
+	</fieldset>
+
+	</form>
+
+{% endif %}
+
+
+{% INCLUDE 'overall_footer.html' %}
+
+

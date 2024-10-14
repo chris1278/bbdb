@@ -1,0 +1,45 @@
+imports:
+    - { resource: tables.yml }
+    
+services:   
+    chris1278.bbdb.controller:
+        class: chris1278\bbdb\controller\main
+        arguments:
+            - '@template'
+            - '@controller.helper'
+            - '@language'
+            
+    chris1278.bbdb.controller.acp:
+        class: chris1278\bbdb\controller\acp_controller
+        arguments:
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@dbal.conn'
+            - '%chris1278.bbdb.chris1278_bbdb%'
+            - '%core.root_path%'
+            - '%core.php_ext%' 
+
+    chris1278.bbdb.listener:
+        class: chris1278\bbdb\event\listener
+        arguments:
+            - '@template'
+            - '@dbal.conn'
+            - '@language'
+            - '@request'
+            - '@auth'
+            - '@controller.helper'
+            - '%chris1278.bbdb.chris1278_bbdb%'
+        tags:
+            - { name: event.listener } 
+
+    chris1278.bbdb.acp_listener:
+        class: chris1278\bbdb\event\acp_listener
+        arguments:
+            - '@template'
+            - '@dbal.conn'
+            - '@request'
+            - '%chris1278.bbdb.chris1278_bbdb%'
+        tags:
+            - { name: event.listener }
+

@@ -1,0 +1,4 @@
+parameters:
+    chris1278.bbdb.chris1278_bbdb: '%core.table_prefix%chris1278_bbdb'
+   
+    

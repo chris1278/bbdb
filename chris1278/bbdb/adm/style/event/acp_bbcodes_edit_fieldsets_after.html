@@ -1,0 +1,61 @@
+<hr>
+<h1>{{ lang('CP_BBCODE_ORG_INFO') }}</h1>
+<p>{{ lang('CP_BBCODE_ORG_INFO_EXPLAIN') }}</p>
+	<fieldset>
+		<legend>{{ lang('CB_BBCODE_F_SHOW') }}</legend>
+		<dl>
+			<dt>
+				<span>{{ lang('CB_BBCODE_F_SHOW_EXPLAIN') }}</span>
+			</dt>
+			<dd>
+				<input type="radio" class="radio" name="cb_bbcode_f_show" value="1" {{ CB_BBCODE_F_SHOW == 1 ? ' checked' }}> {{ lang('YES') }} &nbsp;
+				<input type="radio" class="radio" name="cb_bbcode_f_show" value="0" {{ CB_BBCODE_F_SHOW == 0 ? ' checked' }}> {{ lang('NO') }}
+			</dd>
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>{{ lang('CB_ACP_BBCODE_TITEL') }}</legend>
+		<dl>
+			<dt>
+				<span>{{ lang('CB_ACP_BBCODE_TITEL_EXPLAIN') }}</span>
+			</dt>
+			<dd>
+				<input size="113" type="text" name="cb_bbcode_titel"  value="{{ CB_BBCODE_TITEL }}">
+			</dd>
+		</dl>
+	</fieldset>
+
+	<fieldset>
+		<legend>{{ lang('CB_SHORT_DESCRIPTION') }}</legend>
+		<dl>
+			<dt>
+				<span>{{ lang('CB_SHORT_DESC_EXPLAIN')}}</span>
+			</dt>
+			<dd>
+				<input size="113" type="text" name="cb_bbcode_short_description"  value="{{ CB_SHORT_DESC }}">
+			</dd>
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>{{ lang('CB_LONG_DESCRIPTION') }}</legend>
+		<dl>
+			<dt>
+				<span>{{ lang('CB_LONG_DESC_EXPLAIN')}}</span>
+			</dt>
+			<dd>
+				<textarea name="cb_bbcode_long_description" cols="60" rows="8">{{ CB_LONG_DESC }}</textarea>
+			</dd>
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>{{ lang('CB_ACP_BBCODE_DEMO') }}</legend>
+		<dl>
+			<dt>
+				<span>{{ lang('CB_ACP_BBCODE_DEMO_EXPLAIN')}}</span>
+			</dt>
+			<dd>
+				<textarea name="cb_bbcode_demo" cols="60" rows="8">{{ CB_BBCODE_DEMO }}</textarea>
+			</dd>
+		</dl>
+	</fieldset>
+

@@ -1,0 +1,8 @@
+chris1278_bbdb:
+    path: /bbdb
+    defaults:
+        _controller: 'chris1278.bbdb.controller:base'
+chris1278_bbdb2:
+    path: /bbdb.php
+    defaults:
+        _controller: 'chris1278.bbdb.controller:redirect'

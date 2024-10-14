@@ -1,0 +1,39 @@
+.cb_show {
+	width: 25%;
+}
+
+.cb_name_td, .cb_desc_td, .cb_show_td {
+	text-align: center;
+}
+
+.panel.bg1.demobox {
+	padding: 9px;
+}
+
+.cb_name_td {
+	font-weight: bold;
+}
+
+.bbcode_view_page {
+	padding: 10px 0px;
+}
+
+.cb_titel_opt1 {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 2em;
+	margin: 0.8em 0 0.2em 0;
+	color: #28313F;
+	padding: ;
+}
+
+.cb_titel_opt2 {
+	padding: 0px 0px 0px 10px;
+	font-size: 16px;
+	color: #000;
+	font-style: italic;
+}
+
+.cb_panel {
+	font-size: 1.2em;
+}

@@ -1,0 +1,93 @@
+{% include 'overall_header.html' %}
+{% if BBCB_AUTH %}
+	{% if BBCB_INDEX %}
+		<h2>{{ lang('CB_BBCB_INDEX') }}</h2>
+		<p>{{ lang('CB_BBCB_INDEX_EXPLAIN') }}</p>
+		<div class="forumbg forumbg-table">
+			<div class="inner">
+				<table class="table1">
+					<thead>
+						<tr>
+							<th class="cb_name">{{ lang('CB_BBCODE_TITEL') }}</th>
+							<th class="cb_desc">{{ lang('CB_BBCODE_DESCRIPTION') }}</th>
+							<th class="cb_show">{{ lang('CB_BBCODE_SHOW') }}</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for options in loops.cb_bbcodes_list %}
+							{% if options.CB_BBCODE_SHOW  %}
+								<tr class="{% if  options.S_ROW_COUNT is even %}bg1{% else %}bg2{% endif %}">
+									<td class="cb_name_td">{{ options.CB_BBCODE_TITEL }}</td>
+									<td class="cb_desc_td">{{ options.CB_BBCODE_SHORT_DESCRIPTION }}</td>
+									<td class="cb_show_td"><a href="{{ options.U_BBCODE_VIEW }}"><i class="fa fa fa-eye" aria-hidden="true"></i></a></td>
+								</tr>
+							{% endif %}
+						{% else %}
+							<tr class="bg1">
+								<td></td>
+								<td>{{ lang('CB_NO_BBCODES') }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+
+				</table>
+			</div>
+		</div>
+	{% else %}
+		<div class="bbcode_view_page">
+			<div class="bbcode_title_div"><span class="cb_titel_opt1">{{ lang('CB_BBCODE_TITEL') ~ lang('COLON') }}</span><span class="cb_titel_opt2">{{ CB_BBCODE_TITEL }}</span></div>
+
+			{% if CB_BBCODE_LONG_DESCRIPTION %}
+				<h2>{{ lang('CB_BBCB_LONG_DESC') }}</h2>
+				<div class="panel cb_panel">
+					<div class="inner content">
+						{{ CB_BBCODE_LONG_DESCRIPTION }}
+					</div>
+				</div>
+				{% endif %}
+			{% if CB_BBCODE_MATCH %}
+				<h2>{{ lang('CB_BBCODE_MATCH_DESC') }}</h2>
+				<div class="panel cb_panel bg1">
+					<div class="codebox">
+						<p>{{ lang('CODE') ~ lang('COLON') }} <a rel="nofollow" href="#" onclick="selectCode(this); return false;">{{ lang('SELECT_ALL_CODE') }}</a></p>
+						<code>{{ CB_BBCODE_MATCH }}</code>
+					</div>
+				</div>
+			{% endif %}
+			{% if CB_BBCODE_TPL %}
+				<h2>{{ lang('CB_BBCODE_TPL_DESC') }}</h2>
+				<div class="panel cb_panel bg1">
+					<div class="codebox">
+						<p>{{ lang('CODE') ~ lang('COLON') }} <a rel="nofollow" href="#" onclick="selectCode(this); return false;">{{ lang('SELECT_ALL_CODE') }}</a></p>
+						<code>{{ CB_BBCODE_TPL }}</code>
+					</div>
+				</div>
+			{% endif %}
+			{% if CB_BBCODE_HELPLINE %}
+				<h2>{{ lang('CB_BBCODE_HELP_DESC') }}</h2>
+				<div class="panel cb_panel bg1">
+					<div class="codebox">
+						<p>{{ lang('CODE') ~ lang('COLON') }} <a rel="nofollow" href="#" onclick="selectCode(this); return false;">{{ lang('SELECT_ALL_CODE') }}</a></p>
+						<code>{{ CB_BBCODE_HELPLINE }}</code>
+					</div>
+				</div>
+			{% endif %}
+			{% if CB_BBCODE_DEMO %}
+				<h2>{{ lang('CB_BBCODE_DEMO') }}</h2>
+				<div class="panel bg1 demobox">
+					{{ CB_BBCODE_DEMO }}
+				</div>
+			{% endif %}
+		</div>
+	{% endif %}
+{% else %}
+<div class="panel" id="message">
+	<div class="inner">
+		<h2 class="message-title">{{ lang('INFORMATION') }}</h2>
+		<p>{{ lang('NOT_AUTHORISED') }}</p>
+	</div>
+</div>
+{% endif %}
+
+{% include 'overall_footer.html' %}
+
