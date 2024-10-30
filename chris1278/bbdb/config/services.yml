@@ -24,12 +24,14 @@ services:
         class: chris1278\bbdb\event\listener
         arguments:
             - '@template'
+            - '@user'
             - '@dbal.conn'
             - '@language'
             - '@request'
             - '@auth'
             - '@controller.helper'
             - '%chris1278.bbdb.chris1278_bbdb%'
+            - '%core.php_ext%'
         tags:
             - { name: event.listener } 
 

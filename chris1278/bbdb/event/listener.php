@@ -15,30 +15,36 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class listener implements EventSubscriberInterface
 {
 	protected $template;
+	protected $user;
 	protected $db;
 	protected $language;
 	protected $request;
 	protected $auth;
 	protected $helper;
 	protected $cb_bbcodelist;
+	protected $phpEx;
 
 	public function __construct(
 		\phpbb\template\template $template,
+		\phpbb\user $user,
 		\phpbb\db\driver\driver_interface $db,
 		\phpbb\language\language $language,
 		\phpbb\request\request $request,
 		\phpbb\auth\auth $auth,
 		\phpbb\controller\helper $helper,
-		$cb_bbcodelist
+		$cb_bbcodelist,
+		$phpEx
 	)
 	{
 		$this->template			= $template;
+		$this->user				= $user;
 		$this->db				= $db;
 		$this->language			= $language;
 		$this->request 			= $request;
 		$this->auth				= $auth;
 		$this->helper			= $helper;
 		$this->cb_bbcodelist	= $cb_bbcodelist;
+		$this->phpEx			= $phpEx;
 	}
 
 	public static function getSubscribedEvents()
@@ -66,15 +72,18 @@ class listener implements EventSubscriberInterface
 		{
 			$bbcode_index	= false;
 			$bbcode_info	= $this->read_bbcode_info($bbcode_id);
-			$this->template->assign_vars([
-				'CB_BBCODE_ID'					=> $bbcode_info['id'],
-				'CB_BBCODE_TITEL'				=> $bbcode_info['cb_bbcode_titel'],
-				'CB_BBCODE_MATCH'				=> $bbcode_info['cb_bbcode_match'],
-				'CB_BBCODE_TPL'					=> htmlentities(htmlspecialchars_decode($bbcode_info['cb_bbcode_tpl'],  ENT_QUOTES),  ENT_QUOTES),
-				'CB_BBCODE_DEMO'				=> htmlspecialchars_decode($bbcode_info['cb_bbcode_demo'], ENT_QUOTES),
-				'CB_BBCODE_SHORT_DESCRIPTION'	=> $bbcode_info['cb_bbcode_short_description'],
-				'CB_BBCODE_LONG_DESCRIPTION'	=> $bbcode_info['cb_bbcode_long_description'],
-			]);
+			if ($this->user->page['page_name'] == 'app.' . $this->phpEx . '/bbdb')
+			{
+				$this->template->assign_vars([
+					'CB_BBCODE_ID'					=> $bbcode_info['id'],
+					'CB_BBCODE_TITEL'				=> $bbcode_info['cb_bbcode_titel'],
+					'CB_BBCODE_MATCH'				=> $bbcode_info['cb_bbcode_match'],
+					'CB_BBCODE_TPL'					=> htmlentities(htmlspecialchars_decode($bbcode_info['cb_bbcode_tpl'],  ENT_QUOTES),  ENT_QUOTES),
+					'CB_BBCODE_DEMO'				=> htmlspecialchars_decode($bbcode_info['cb_bbcode_demo'], ENT_QUOTES),
+					'CB_BBCODE_SHORT_DESCRIPTION'	=> $bbcode_info['cb_bbcode_short_description'],
+					'CB_BBCODE_LONG_DESCRIPTION'	=> $bbcode_info['cb_bbcode_long_description'],
+				]);
+			}
 		}
 
 		foreach ($this->read_bbcb_row() as $row)

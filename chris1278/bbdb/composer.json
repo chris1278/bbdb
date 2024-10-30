@@ -24,6 +24,13 @@
         "lang-min-ver": "1.0.0",
         "soft-require": {
             "phpbb/phpbb": ">=3.2.10,<3.4.0@dev"
-        }
+        },
+		"version-check": {
+			"host": "raw.githubusercontent.com",
+			"directory": "/Chris1278/bbdb/master",
+			"filename": "bbdb.json",
+			"ssl": true
+		}
     }
 }
+
